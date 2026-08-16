@@ -1,0 +1,113 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tradecomply-api"
+version = "0.1.0"
+description = "TradeComply AI South Africa MVP - FastAPI Backend"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+authors = [
+  { name = "TradeComply AI", email = "dev@tradecomply.ai" }
+]
+
+dependencies = [
+  "fastapi>=0.109.0",
+  "uvicorn[standard]>=0.27.0",
+  "sqlalchemy[asyncio]>=2.0.25",
+  "asyncpg>=0.29.0",
+  "pydantic[email]>=2.6.0",
+  "email-validator>=2.1.0",
+  "pydantic-settings>=2.1.0",
+  "python-jose[cryptography]>=3.3.0",
+  "passlib[argon2]>=1.7.4",
+  "python-multipart>=0.0.6",
+  "celery[redis]>=5.3.4",
+  "redis>=5.0.1",
+  "alembic>=1.13.0",
+  "psycopg[binary]>=3.1.12",
+  "minio>=7.2.0",
+  "httpx>=0.25.2",
+  "python-dotenv>=1.0.0",
+  "pytz>=2023.3",
+  "pydantic-core>=2.16.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4.3",
+  "pytest-asyncio>=0.21.1",
+  "pytest-cov>=4.1.0",
+  "aiosqlite>=0.19.0",
+  "black>=23.12.0",
+  "isort>=5.13.2",
+  "pylint>=3.0.3",
+  "mypy>=1.7.1",
+  "sqlalchemy[mypy]>=2.0.25",
+  "types-python-dateutil>=2.8.20",
+  "types-pytz>=2023.3.0.0",
+]
+
+[project.urls]
+Repository = "https://github.com/tradecomply-ai/tradecomply-ai-za"
+Issues = "https://github.com/tradecomply-ai/tradecomply-ai-za/issues"
+Documentation = "https://docs.tradecomply.ai"
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+python_version = "312"
+multi_line_mode = 3
+include_trailing_comma = true
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = false
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+check_untyped_defs = true
+plugins = ["sqlalchemy.ext.mypy.plugin", "pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+  "celery.*",
+  "minio.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--strict-markers -ra"
+markers = [
+  "unit: Unit tests",
+  "integration: Integration tests",
+  "slow: Slow running tests",
+]

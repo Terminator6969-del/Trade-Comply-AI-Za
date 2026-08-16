@@ -1,0 +1,4407 @@
+Yes, it is an exceptionally strong idea. In fact, it is one of the most
+commercially viable B2B AI software strategies for the Southern African market.
+
+Why This Idea Works (The Core Strengths)
+
+1. Asymmetric ROI (High Cost of Mistakes vs. Low Price of Software)
+
+In software sales, the easiest products to sell are those that prevent
+catastrophic, quantifiable financial loss.
+
+  - A truck stuck at the Beitbridge border post costs R5,000 to R15,000 per day
+    in demurrage, truck hire, and standing time.
+  - SARS penalties for undeclared ITAC items or wrong HS codes can reach 100% of
+    the cargo value plus seizure.
+  - If your software costs R12,500/month and prevents just one border delay or
+    SARS penalty every two months, it pays for itself 5x over. The sales pitch
+    writes itself.
+
+2. The "Trojan Horse" Strategy (Middleware, Not Software Replacement)
+
+The biggest mistake founders make in logistics is trying to replace entrenched
+systems like CargoWise, SoftClear, or EasyClear. Freight forwarders will never
+switch their core operating system for an unproven startup—the switching costs
+and regulatory risks are too high.
+
+  - By acting as pre-processing middleware that ingests messy PDFs and outputs a
+    simple, formatted CSV, you bypass corporate IT security hurdles and lengthy
+    procurement cycles.
+  - You integrate with their workflow in 5 minutes instead of 6 months.
+
+3. Deterministic Hybrid Tech Stack (Solving the Hallucination Problem)
+
+Using an LLM to extract unstructured text from messy Asian supplier invoices
+while using a strict SQL/Python engine for tariff calculations solves the #1
+objection enterprises have against AI: hallucination.
+
+  - You get the intelligence of AI for document parsing.
+  - You keep the 100% accuracy of code for tax math.
+
+4. Geographic Density & Regional Expansion
+
+Gauteng (Johannesburg) and KZN (Durban) house hundreds of mid-sized clearing
+agents within a 50 km radius.
+
+  - You don't need a global sales team; you can sign your first 10 customers by
+    driving to City Deep (JHB) or Bayhead (Durban) and having face-to-face
+    coffees with Operations Directors.
+  - Once you master South Africa, expanding into SADC (Zimbabwe, Zambia, DRC,
+    Mozambique) becomes a natural progression because SA controls the transit
+    routes.
+
+The Crucial Risks You Must Solve
+
+While the idea is strong, executing it requires solving three specific
+challenges:
+
+1. Liability & Trust (Who gets blamed when SARS seizes cargo?)
+
+If your AI flags a shipment as "Clear" and a SARS inspector seizes the container
+because of a misclassified HS code, the client will blame your software.
+
+  - Solution: Position the product as a "Copilot for Customs Clerks", not an
+    autonomous engine. The UI must require a human clerk to click "Approve Draft
+    SAD500" before exporting. Your terms of service must explicitly state that
+    final legal clearance responsibility rests with the registered customs
+    declarant.
+
+2. HS Code Ambiguity (The "Art" of Tariff Classification)
+
+Customs classification is rarely straightforward. For example, is a "Smart Solar
+Power Bank" classified under Solar Panels, Lithium Batteries, or Electronics?
+
+  - Solution: Don't just output one HS code. Have your AI output the Top
+    Suggested HS Code + Confidence Score, plus alternative codes with
+    explanation notes. This gives the clerk the exact context they need to make
+    the right call in seconds.
+
+3. SARS Tariff Updates (Maintaining the "Data Moat")
+
+SARS updates Schedule 1, Schedule 2 (anti-dumping), and ITAC rebate lists
+frequently (especially during budget speeches or trade disputes).
+
+  - Solution: You need an automated daily/weekly scraper or script that monitors
+    the official SARS Customs & Excise updates page and syncs changes into your
+    SQLite/Postgres database.
+
+How to Execute This to Win
+
+1.  Focus on "High-Risk" Verticals First: Start specifically with forwarders
+    importing Textiles/Apparel (high anti-dumping duties), Solar & Batteries
+    (booming market, heavy NRCS rules), or Steel/Capital Equipment (strict ITAC
+    permits). Don't try to solve all commodities on Day 1.
+
+2.  Map to Specific Legacy Systems: Find out if your first 3 design partners use
+    SoftClear, CargoWise, or EasyClear. Build exact, pre-configured CSV
+    templates matching those specific software imports.
+
+3.  In-Person Onboarding: Go sit next to a junior customs clerk at a firm in JHB
+    or Durban. Watch them process 10 real invoices manually. You will learn more
+    about edge cases (like weird Incoterms or multi-currency invoices) in 2
+    hours than in 2 months of isolated coding.
+
+Verdict
+
+9.5 / 10.
+
+The strategy addresses a high-value problem in a concentrated regional market
+with an achievable wedge strategy. If you execute the 30-day plan, secure 3
+design partners, and deliver a reliable pre-processing engine, you can
+realistically hit R100,000+ MRR within 3 to 6 months.
+
+# Complete PRD + Build Prompt  
+## Product: **TradeComply AI South Africa**
+
+> **AI pre-clearance compliance engine for South African freight forwarders, clearing agents, importers, exporters, and cross-border transporters.**
+
+This is a full, production-minded PRD for building the South African version of **TradeComply AI**.
+
+It includes:
+
+- Product vision
+- Market problem
+- Target users
+- MVP scope
+- Full functional requirements
+- AI requirements
+- South African compliance requirements
+- UX flows
+- Tech stack
+- Architecture
+- Database schema
+- API design
+- Background jobs
+- AI pipeline
+- Security / POPIA requirements
+- Metrics
+- Pricing
+- Go-to-market
+- Roadmap
+- Risks
+- Repository structure
+- Local dev setup
+- Test plan
+- Definition of Done
+- Complete master build prompt for Cursor / Copilot / Claude / Devin / Windsurf
+
+---
+
+# 1. Product Name
+
+## **TradeComply AI South Africa**
+
+Short name:
+
+> **TradeComply AI ZA**
+
+---
+
+# 2. One-Line Pitch
+
+> TradeComply AI ZA turns messy import/export documents into SARS-ready, compliance-checked trade packets for South African clearing agents, freight forwarders, and cross-border transporters.
+
+---
+
+# 3. Core Product Thesis
+
+South African trade compliance is painful because:
+
+- Documents arrive as messy PDFs, scans, emails, Excel files, and photos.
+- Clerks manually extract invoice, packing list, and transport data.
+- HS / SARS tariff classification is error-prone.
+- Missing permits cause border delays and penalties.
+- SARS is strict on valuation, anti-dumping duties, ITAC permits, NRCS compliance, and origin rules.
+- Trucks delayed at Beitbridge, Lebombo, Ramatlabama, or Durban port create massive financial losses.
+
+AI can now automate the expensive manual part:
+
+> Document intake → extraction → classification → compliance checks → duty estimate → customs-ready packet.
+
+The product should not begin as a full customs submission system.
+
+It should begin as:
+
+> **The AI pre-clearance and compliance validation layer before SARS submission.**
+
+Later, it can become:
+
+> The trade data and compliance infrastructure layer for Southern Africa.
+
+---
+
+# 4. Vision
+
+TradeComply AI ZA becomes the operating system for Southern African cross-border trade compliance.
+
+Long-term platform vision:
+
+1. **AI document automation**
+   - Invoice, packing list, BL/AWB, permits, certificates.
+
+2. **Compliance intelligence**
+   - HS/SARS classification, ITAC, NRCS, SADC origin, anti-dumping, valuation risk.
+
+3. **Data infrastructure**
+   - Structured shipment data accessible via API and MCP.
+
+4. **Workflow automation**
+   - Client-specific clearance workflows.
+
+5. **Trade finance enablement**
+   - Verified trade flows become the basis for credit and financing products.
+
+The billion-dollar opportunity is not just “customs software”.
+
+It is:
+
+> **The trusted trade compliance and data rail for African cross-border commerce.**
+
+---
+
+# 5. South African Beachhead
+
+## Primary beachhead
+
+Start with:
+
+> **South African import pre-clearance for shipments entering via Durban and OR Tambo.**
+
+Why:
+
+- High volume.
+- Standardized import documents.
+- SARS compliance is strict.
+- Clearing agents feel pain daily.
+- Duty/VAT/permit checks create immediate value.
+
+## Secondary beachhead
+
+Add quickly:
+
+> **South African export/transit to Zimbabwe via Beitbridge.**
+
+Why:
+
+- Massive border friction.
+- High cost of delays.
+- Strong demand for accurate transit/export packets.
+
+## Recommended MVP focus
+
+For the first sellable product, build:
+
+> **South African Import Pre-Clearance Packet Generator**
+
+Then expand into:
+
+> Export/transit packet generation for SADC corridors.
+
+---
+
+# 6. Target Market
+
+## Primary customers
+
+### 1. Customs clearing agents
+
+They prepare and submit declarations.
+
+Pain:
+
+- Manual data entry.
+- HS code errors.
+- SARS penalties.
+- Client pressure.
+- Staff overload.
+
+### 2. Freight forwarders
+
+They coordinate cargo movement.
+
+Pain:
+
+- Incomplete documents.
+- Delayed clearance.
+- Port storage costs.
+- Poor visibility.
+
+### 3. Importers
+
+Businesses importing goods into South Africa.
+
+Pain:
+
+- Unexpected duties.
+- Missing permits.
+- Cargo stuck at port.
+- Lack of landed-cost visibility.
+
+### 4. Exporters
+
+South African manufacturers, miners, agricultural exporters.
+
+Pain:
+
+- Export documentation.
+- Origin certificates.
+- Border delays.
+- Inconsistent buyer requirements.
+
+### 5. Cross-border transporters
+
+Truck fleets moving goods through SADC.
+
+Pain:
+
+- Trucks stuck at borders.
+- Missing transit documents.
+- Demurrage.
+- Driver waiting time.
+
+---
+
+# 7. Ideal Customer Profile
+
+## ICP 1: Mid-market clearing agent
+
+Location:
+
+- Johannesburg
+- Durban
+- Cape Town
+- Pretoria
+- Richards Bay
+
+Company size:
+
+- 5 to 100 staff
+
+Monthly volume:
+
+- 100 to 5,000 Bills of Entry / shipments
+
+Willing to pay because:
+
+- Errors are expensive.
+- Speed matters.
+- Staff costs are rising.
+
+---
+
+## ICP 2: Cross-border transporter
+
+Routes:
+
+- SA ↔ Zimbabwe
+- SA ↔ Mozambique
+- SA ↔ Zambia
+- SA ↔ DRC
+- SA ↔ Namibia
+- SA ↔ Botswana
+
+Wants:
+
+- Faster border crossings.
+- Fewer rejected documents.
+- Better driver turnaround time.
+
+---
+
+## ICP 3: Importer with recurring shipments
+
+Industries:
+
+- Electronics
+- Solar equipment
+- Machinery
+- Textiles
+- FMCG
+- Auto parts
+- Chemicals
+- Food ingredients
+
+Wants:
+
+- Predictable landed cost.
+- Permit alerts.
+- Faster clearance.
+
+---
+
+# 8. User Personas
+
+## Persona 1: Clearing Clerk
+
+Name:
+
+> Thabo, 28, clearing clerk at a JHB customs brokerage.
+
+Goals:
+
+- Process shipments quickly.
+- Avoid HS code errors.
+- Reduce rework.
+
+Frustrations:
+
+- Messy supplier invoices.
+- Manual typing.
+- Waiting for permits.
+- SARS queries.
+
+Uses product to:
+
+- Upload documents.
+- Extract fields.
+- Get HS code suggestions.
+- Create draft declaration data.
+
+---
+
+## Persona 2: Compliance Manager
+
+Name:
+
+> Priya, 38, compliance manager.
+
+Goals:
+
+- Reduce penalties.
+- Ensure permit compliance.
+- Maintain audit trail.
+
+Frustrations:
+
+- Junior staff mistakes.
+- Changing tariff rules.
+- Missing ITAC/NRCS requirements.
+
+Uses product to:
+
+- Review high-risk shipments.
+- Approve classifications.
+- Monitor compliance flags.
+
+---
+
+## Persona 3: Operations Director
+
+Name:
+
+> Johan, 45, freight forwarding director.
+
+Goals:
+
+- Increase shipment throughput.
+- Reduce staff cost per shipment.
+- Improve client service.
+
+Frustrations:
+
+- Slow document processing.
+- Port storage costs.
+- Clients calling for updates.
+
+Uses product to:
+
+- View dashboard.
+- Track bottlenecks.
+- Monitor volume and risk.
+
+---
+
+## Persona 4: Importer / Exporter Client
+
+Name:
+
+> Aisha, 34, procurement manager.
+
+Goals:
+
+- Know landed cost.
+- Avoid surprise delays.
+- Get goods quickly.
+
+Frustrations:
+
+- Unclear duties.
+- Missing certificates.
+- Lack of status visibility.
+
+Uses product to:
+
+- Upload supplier documents.
+- Receive compliance report.
+- Share packet with clearing agent.
+
+---
+
+# 9. Core Value Proposition
+
+For South African clearing agents, freight forwarders, importers, and exporters:
+
+TradeComply AI ZA:
+
+- Extracts data from messy trade documents.
+- Recommends HS/SARS tariff codes.
+- Flags missing permits and regulatory issues.
+- Estimates duty, VAT, and landed cost.
+- Produces a customs-ready packet.
+- Keeps a full audit trail.
+- Exposes data via API/MCP.
+
+Result:
+
+- Faster pre-clearance.
+- Fewer errors.
+- Lower penalty risk.
+- Less manual work.
+- Better landed-cost visibility.
+- Higher shipment throughput.
+
+---
+
+# 10. Product Positioning
+
+Do not position as:
+
+> “A chatbot for customs.”
+
+Position as:
+
+> **An AI compliance workflow and data layer for South African cross-border trade.**
+
+The product sells:
+
+- Speed
+- Accuracy
+- Risk reduction
+- Auditability
+- Infrastructure access
+
+Not:
+
+- Pretty UI
+- Manual hours
+- Generic AI features
+
+---
+
+# 11. Business Model
+
+## Primary revenue
+
+B2B SaaS subscription + usage.
+
+## Pricing tiers
+
+### Starter
+
+For small clearing agents/importers.
+
+- R4,500/month
+- 50 shipments/month
+- 3 users
+- Document extraction
+- HS classification
+- Compliance flags
+- PDF/JSON report
+
+### Growth
+
+For mid-market forwarders/clearing agents.
+
+- R12,500/month
+- 250 shipments/month
+- 10 users
+- API access
+- Bulk upload
+- Client-specific workflows
+- Priority support
+
+### Enterprise
+
+For large logistics companies, transport fleets, enterprises.
+
+- Custom pricing
+- Unlimited or high-volume shipments
+- SSO/SAML optional later
+- Custom integrations
+- Dedicated onboarding
+- SLA
+- Data residency
+- MCP/API access
+- Custom rule packs
+
+### Usage add-ons
+
+- R50 per additional shipment
+- R250 per complex compliance review
+- API calls billed per 1,000 requests
+- WhatsApp notification pack optional
+
+---
+
+# 12. MVP Objective
+
+Build a working South African MVP that can:
+
+1. Receive messy trade documents.
+2. Extract structured shipment data.
+3. Recommend HS/SARS tariff codes.
+4. Flag South African compliance issues.
+5. Estimate duty and VAT.
+6. Generate a customs-ready packet.
+7. Allow human review and approval.
+8. Provide API access.
+9. Maintain audit logs.
+10. Work for at least one real pilot customer.
+
+---
+
+# 13. MVP Scope
+
+## In scope
+
+### Shipment types
+
+For MVP:
+
+- Import into South Africa
+- Export from South Africa, basic packet only
+- Transit packet, basic support later
+
+Recommended MVP priority:
+
+1. Import shipment
+2. Export shipment, basic
+3. Transit to Zimbabwe, phase 1.5
+
+### Documents
+
+Supported document types:
+
+- Commercial invoice
+- Packing list
+- Bill of lading
+- Air waybill
+- Road consignment note / CMR / waybill
+- Certificate of origin, SADC or generic
+- Import permit / ITAC permit
+- NRCS LOA, if available
+- Insurance certificate
+- Dangerous goods declaration, if available
+- MSDS, if available
+
+### Countries
+
+MVP:
+
+- Origin: any major origin, especially China, India, EU, US
+- Destination: South Africa
+
+Phase 1.5:
+
+- South Africa to Zimbabwe
+- South Africa to Namibia
+- South Africa to Botswana
+- South Africa to Mozambique
+
+### Compliance modules
+
+MVP:
+
+- HS/SARS classification
+- Missing document detection
+- Basic duty/VAT estimate
+- ITAC permit flags
+- NRCS LOA flags
+- SADC certificate of origin flags
+- Dangerous goods flags
+- Valuation anomaly flags
+
+Not MVP:
+
+- Direct SARS submission
+- Full anti-dumping calculation
+- Full bond management
+- Full customs EDI accreditation
+- Payments to SARS
+- Legal advice
+
+---
+
+# 14. High-Level User Journey
+
+## Journey: Import shipment
+
+1. User creates a new shipment.
+2. User uploads supplier invoice, packing list, and bill of lading.
+3. System classifies documents.
+4. AI extracts fields and line items.
+5. System suggests HS/SARS tariff codes.
+6. System calculates estimated duty/VAT.
+7. System flags missing permits or compliance issues.
+8. User reviews and corrects fields.
+9. Compliance manager approves.
+10. System generates PDF packet, JSON, and CSV.
+11. Data can be exported or sent via API to broker/EDI system.
+
+---
+
+## Journey: Export/transit to Zimbabwe
+
+1. User creates export/transit shipment.
+2. Uploads invoice, packing list, transport document.
+3. AI extracts fields.
+4. System checks:
+   - Export controls
+   - SADC origin data
+   - Missing transport documents
+   - Dangerous goods flags
+   - Consistency between invoice and packing list
+5. System generates border packet.
+6. User approves.
+7. Packet is downloaded or shared.
+
+---
+
+# 15. Functional Requirements
+
+Below is the complete functional specification.
+
+Use IDs in development tickets.
+
+---
+
+## FR-001: Authentication
+
+System must support:
+
+- Email/password login
+- Password reset
+- JWT session access
+- Refresh tokens
+- Password hashing with Argon2 or bcrypt
+- Optional magic link later
+
+Acceptance criteria:
+
+- Users cannot access data without login.
+- Sessions expire securely.
+- Passwords are never stored in plain text.
+
+---
+
+## FR-002: Multi-Tenant Organizations
+
+System must support:
+
+- Create organization
+- Invite users
+- Remove users
+- Assign roles
+- Separate data by organization
+
+Acceptance criteria:
+
+- Every entity belongs to an organization.
+- All queries filter by organization.
+- Users cannot access another organization’s data.
+
+---
+
+## FR-003: Roles and Permissions
+
+Roles:
+
+- Owner
+- Admin
+- Compliance Manager
+- Clerk
+- Viewer
+- API Service Account
+
+Permissions:
+
+| Action | Owner | Admin | Compliance Manager | Clerk | Viewer | API |
+|---|---:|---:|---:|---:|---:|---:|
+| Manage org | Yes | Yes | No | No | No | No |
+| Manage users | Yes | Yes | No | No | No | No |
+| Create shipment | Yes | Yes | Yes | Yes | No | Yes |
+| Upload documents | Yes | Yes | Yes | Yes | No | Yes |
+| Edit extraction | Yes | Yes | Yes | Yes | No | Yes |
+| Approve classification | Yes | Yes | Yes | No | No | No |
+| Generate packet | Yes | Yes | Yes | Yes | No | Yes |
+| View audit logs | Yes | Yes | Yes | No | Yes | No |
+| Manage API keys | Yes | Yes | No | No | No | No |
+
+---
+
+## FR-004: Shipment Management
+
+System must allow creation of shipments.
+
+Fields:
+
+- Shipment reference
+- Shipment type:
+  - import
+  - export
+  - transit
+  - removal_in_bond later
+- Transport mode:
+  - sea
+  - air
+  - road
+  - rail
+- Origin country
+- Destination country
+- Port of loading
+- Port of discharge
+- Border post
+- Importer
+- Exporter
+- Supplier
+- Consignee
+- Notify party
+- Clearing agent
+- Incoterms
+- Currency
+- Invoice date
+- Estimated arrival date
+- Status
+- Risk level
+
+Statuses:
+
+- draft
+- documents_received
+- extracting
+- needs_review
+- compliance_ready
+- approved
+- packet_generated
+- submitted_external
+- completed
+- rejected
+- archived
+
+---
+
+## FR-005: Party Management
+
+System must store parties:
+
+- Importer
+- Exporter
+- Supplier
+- Consignee
+- Clearing agent
+- Transporter
+- Notify party
+
+Fields:
+
+- Name
+- Registration number
+- VAT number
+- Customs client number, if applicable
+- Address
+- Contact person
+- Email
+- Phone
+- Country
+
+---
+
+## FR-006: Document Upload
+
+System must support:
+
+- Single file upload
+- Bulk upload
+- Drag and drop
+- Email ingestion later
+- File types:
+  - PDF
+  - PNG
+  - JPG/JPEG
+  - CSV
+  - XLSX optional later
+
+Maximum file size:
+
+- 25 MB per file for MVP
+
+System must:
+
+- Store file securely
+- Scan file type
+- Prevent executable uploads
+- Assign document type automatically or manually
+
+Document types:
+
+- commercial_invoice
+- packing_list
+- bill_of_lading
+- airway_bill
+- road_waybill
+- certificate_of_origin
+- import_permit
+- export_permit
+- nrcs_loa
+- dangerous_goods_declaration
+- msds
+- insurance_certificate
+- other
+
+---
+
+## FR-007: Document Classification
+
+System must identify likely document type.
+
+Output:
+
+- document_type
+- confidence
+- page_count
+- language
+- extraction_status
+
+If confidence below threshold:
+
+- Ask user to confirm document type.
+
+---
+
+## FR-008: Document Extraction
+
+System must extract header fields:
+
+For invoice:
+
+- Invoice number
+- Invoice date
+- Supplier name
+- Supplier address
+- Buyer/importer name
+- Buyer address
+- Currency
+- Incoterms
+- Total invoice value
+- Tax amount, if shown
+- Payment terms
+- Country of origin, if shown
+
+For packing list:
+
+- Number of packages
+- Package type
+- Gross weight
+- Net weight
+- Volume/CBM
+- Marks and numbers
+- Line item quantities
+
+For bill of lading / AWB:
+
+- BL/AWB number
+- Carrier
+- Port of loading
+- Port of discharge
+- Vessel/flight, if available
+- Container number
+- Seal number
+- Shipper
+- Consignee
+- Notify party
+
+For certificate of origin:
+
+- Certificate number
+- Origin country
+- Destination country
+- Exporter
+- Consignee
+- Goods description
+- Date
+
+---
+
+## FR-009: Line Item Extraction
+
+System must extract line items.
+
+Line item fields:
+
+- line_number
+- description
+- sku
+- quantity
+- unit_of_measure
+- unit_price
+- total_price
+- currency
+- weight_kg
+- hs_code_suggested
+- country_of_origin
+- permit_flags
+
+If line item is ambiguous:
+
+- Mark as needs_review.
+
+---
+
+## FR-010: Extraction Confidence
+
+Each extracted field must have:
+
+- value
+- confidence
+- source_document_id
+- page_number optional
+- bounding_box optional later
+
+Confidence thresholds:
+
+- High: >= 0.85
+- Medium: 0.60 to 0.84
+- Low: < 0.60
+
+UI must highlight low-confidence fields.
+
+---
+
+## FR-011: Manual Correction
+
+Users must be able to:
+
+- Edit extracted fields
+- Add missing fields
+- Delete duplicate line items
+- Merge line items
+- Split line items
+- Add notes
+- Mark field as verified
+
+Every edit must be logged.
+
+---
+
+## FR-012: HS/SARS Classification
+
+System must recommend tariff codes.
+
+Inputs:
+
+- Product description
+- Line item attributes
+- Origin country
+- Destination country
+- Historical corrections
+- Tariff database
+
+Outputs:
+
+- Top 5 candidates
+- HS code
+- SA national tariff code, if known
+- Description
+- Duty rate, if known
+- Confidence
+- Reasoning
+- Legal notes / section notes
+- Required permit flags
+
+User can:
+
+- Accept
+- Override
+- Add reason for override
+
+---
+
+## FR-013: Classification Review
+
+System must require human approval when:
+
+- Confidence < 0.85
+- Product category is high-risk
+- Anti-dumping risk detected
+- Value anomaly detected
+- Regulatory permit required
+- Origin is uncertain
+
+Compliance manager approves final classification.
+
+---
+
+## FR-014: Duty and Tax Estimation
+
+System must estimate:
+
+- Customs duty
+- VAT
+- Excise, if applicable
+- Levies, if known
+- Anti-dumping placeholder
+- Total estimated taxes
+- Landed cost estimate
+
+Inputs:
+
+- Customs value
+- Incoterms
+- Currency
+- Exchange rate
+- Duty rate
+- VAT rate
+- Additional levies
+
+MVP assumption:
+
+- VAT rate: 15%
+- Exchange rate: admin-configurable or external API later
+
+Important:
+
+- Show disclaimer:
+  > Estimate only. Final assessment subject to SARS and clearing agent verification.
+
+---
+
+## FR-015: Compliance Rule Engine
+
+System must run deterministic rules.
+
+Rule categories:
+
+1. Missing documents
+2. Permit requirements
+3. Regulatory approvals
+4. Origin/certificate issues
+5. Dangerous goods
+6. Valuation anomalies
+7. Restricted/prohibited goods
+8. Inconsistent data
+
+Output:
+
+- check_id
+- rule_name
+- severity:
+  - info
+  - warning
+  - error
+  - critical
+- message
+- recommended_action
+- related_entity:
+  - shipment
+  - document
+  - line_item
+
+---
+
+## FR-016: South African Rule Packs
+
+MVP rule packs:
+
+### SARS Tariff Pack
+
+- Validates HS/SARS code format
+- Checks description vs code
+- Checks unit of measure consistency
+
+### ITAC Permit Pack
+
+- Flags controlled goods categories
+- Flags missing import permit
+- Flags anti-dumping risk categories
+
+### NRCS Pack
+
+- Flags regulated products requiring Letter of Authority
+- Examples:
+  - electronics
+  - certain food products
+  - chemicals
+  - batteries
+  - textiles, depending on category
+
+### SADC Origin Pack
+
+- Flags missing SADC certificate where preferential duty claimed
+- Checks origin country vs certificate
+- Checks exporter/consignee consistency
+
+### Dangerous Goods Pack
+
+- Flags batteries, chemicals, aerosols, flammable goods
+- Requests MSDS or dangerous goods declaration
+- Flags missing UN number if detected
+
+### Valuation Pack
+
+- Flags unusually low value compared to historical product category
+- Flags missing currency
+- Flags inconsistent total values
+
+---
+
+## FR-017: Risk Scoring
+
+Each shipment must receive a risk score.
+
+Inputs:
+
+- Extraction confidence
+- Classification confidence
+- Compliance errors
+- Missing documents
+- High-risk product category
+- Value anomaly
+- User overrides
+- Origin/destination risk
+
+Risk levels:
+
+- low
+- medium
+- high
+- critical
+
+UI must show risk badge.
+
+---
+
+## FR-018: Compliance Packet Generation
+
+System must generate:
+
+1. PDF packet
+2. JSON packet
+3. CSV packet
+4. Optional XML later
+
+Packet includes:
+
+- Shipment summary
+- Parties
+- Documents list
+- Extracted fields
+- Line items
+- HS/SARS codes
+- Duty estimate
+- Compliance flags
+- Approved-by user
+- Timestamp
+- Audit reference
+- Disclaimers
+
+Packet must be downloadable.
+
+---
+
+## FR-019: Shipment Dashboard
+
+Dashboard must show:
+
+- Total shipments
+- Needs review
+- High risk
+- Completed
+- Average processing time
+- Document extraction failures
+- Classification acceptance rate
+- Recent activity
+
+---
+
+## FR-020: Shipment List
+
+List must support:
+
+- Search
+- Filter by status
+- Filter by risk
+- Filter by date
+- Filter by shipment type
+- Filter by client/importer
+- Sort by created date
+- Bulk select
+- Export CSV
+
+---
+
+## FR-021: Shipment Detail Page
+
+Tabs:
+
+- Overview
+- Documents
+- Extraction
+- Classification
+- Compliance
+- Duties
+- Packet
+- Audit Log
+- Settings
+
+---
+
+## FR-022: Document Review UI
+
+Must show:
+
+- Original document preview
+- Extracted fields panel
+- Confidence indicators
+- Editable fields
+- Source highlighting later
+- Accept/reject suggested values
+
+---
+
+## FR-023: Audit Logging
+
+System must log:
+
+- Login
+- Document upload
+- Extraction started/completed
+- Field edits
+- Classification accepted/overridden
+- Compliance check run
+- Packet generated
+- API calls
+- User role changes
+- Organization changes
+
+Audit log fields:
+
+- id
+- org_id
+- user_id
+- action
+- entity_type
+- entity_id
+- before_value optional
+- after_value optional
+- metadata JSON
+- ip_address
+- created_at
+
+Audit logs must be immutable.
+
+---
+
+## FR-024: API Access
+
+System must expose REST API.
+
+Authentication:
+
+- API key
+- Bearer token
+
+Features:
+
+- Create shipment
+- Upload document
+- Get extraction
+- Classify product
+- Run compliance check
+- Get duty estimate
+- Generate packet
+- Get shipment status
+- List shipments
+
+Rate limiting:
+
+- 60 requests/minute for starter
+- 300 requests/minute for growth
+- Custom for enterprise
+
+---
+
+## FR-025: MCP Access
+
+System should expose MCP server later.
+
+MCP tools:
+
+- `create_shipment`
+- `classify_product`
+- `check_shipment_compliance`
+- `estimate_duties`
+- `generate_packet`
+- `search_tariff`
+
+MCP resources:
+
+- `shipment:///{id}`
+- `tariff:///{code}`
+- `compliance:///{shipment_id}`
+
+MCP is not required for first prototype but should be designed for.
+
+---
+
+## FR-026: Notifications
+
+MVP:
+
+- Email notification when extraction completes
+- Email notification when critical compliance flag appears
+
+Later:
+
+- WhatsApp
+- Slack
+- Webhook
+
+---
+
+## FR-027: Usage Metering
+
+System must track:
+
+- Shipments processed
+- Documents processed
+- API calls
+- PDF packets generated
+- Storage used
+
+Used for billing and plan limits.
+
+---
+
+## FR-028: Billing
+
+Prototype:
+
+- Manual invoicing
+- Plan assignment by admin
+
+Production:
+
+- Stripe/PayFast/Yoco/Peach Payments optional
+- Subscription plans
+- Usage overage billing
+
+---
+
+## FR-029: Admin Panel
+
+Admin must manage:
+
+- Organizations
+- Users
+- Plans
+- API keys
+- Tariff records
+- Rule packs
+- Exchange rates
+- Feature flags
+- Audit logs
+- Usage metrics
+
+---
+
+## FR-030: Search
+
+Global search must support:
+
+- Shipment reference
+- Invoice number
+- BL/AWB number
+- Importer name
+- Supplier name
+- HS code
+- Product description
+
+---
+
+# 16. Non-Functional Requirements
+
+## NFR-001: Performance
+
+MVP targets:
+
+- Document extraction: under 90 seconds per document
+- Classification: under 15 seconds after extraction
+- Compliance check: under 10 seconds
+- Packet generation: under 15 seconds
+- Page load: under 2 seconds
+
+Production targets:
+
+- API response under 2 seconds for simple queries
+- Batch processing 500 documents/hour
+
+---
+
+## NFR-002: Accuracy
+
+Prototype targets:
+
+- Header field extraction: 80%+
+- Line item extraction: 70%+
+- HS top-5: 70%+
+- HS top-1: 50%+
+
+Pilot targets:
+
+- Header field extraction: 90%+
+- Line item extraction: 80%+
+- HS top-5: 85%+
+- HS top-1: 70%+
+
+Production targets:
+
+- Header field extraction: 95%+
+- Line item extraction: 90%+
+- HS top-5: 92%+
+- HS top-1: 80%+
+
+---
+
+## NFR-003: Availability
+
+Prototype:
+
+- Local Docker deployment
+
+Production:
+
+- 99.5% uptime initially
+- 99.9% later
+
+---
+
+## NFR-004: Security
+
+Required:
+
+- TLS everywhere
+- Encryption at rest
+- Secure secrets
+- API rate limiting
+- Input validation
+- SQL injection prevention
+- XSS prevention
+- CSRF protection
+- File upload validation
+- Tenant isolation
+- Audit logs
+
+---
+
+## NFR-005: POPIA Compliance
+
+Because South Africa applies POPIA:
+
+- Personal information must be minimized.
+- Contact details should be stored only where necessary.
+- Provide data deletion workflow.
+- Provide data export workflow.
+- Maintain processing records.
+- Have operator/processor agreements.
+- Store data in South Africa where possible.
+- If using foreign AI providers, disclose cross-border processing where required.
+
+Important:
+
+- Do not use customer documents to train public models without permission.
+- Provide opt-in/opt-out for model improvement.
+
+---
+
+## NFR-006: Explainability
+
+Every AI recommendation must include:
+
+- Confidence score
+- Reasoning
+- Source reference
+- Alternatives
+
+Classification must not be a black box.
+
+---
+
+## NFR-007: Human-in-the-Loop
+
+No AI output should be treated as final legal/customs advice.
+
+High-risk decisions require human approval.
+
+Product should display:
+
+> AI-assisted recommendation. Final responsibility remains with the user/clearing agent.
+
+---
+
+## NFR-008: Observability
+
+System must log:
+
+- Request logs
+- Job logs
+- AI extraction logs
+- Classification logs
+- Error logs
+- API usage
+- Latency metrics
+- Confidence metrics
+
+Use:
+
+- Structured JSON logs
+- Correlation IDs
+- Sentry or similar error tracking
+
+---
+
+## NFR-009: Scalability
+
+Architecture must support:
+
+- Multi-tenant SaaS
+- Background workers
+- Horizontal scaling
+- Async jobs
+- Object storage
+- Vector search
+- API gateway later
+
+---
+
+## NFR-010: Maintainability
+
+Use:
+
+- Monorepo
+- Typed code
+- Linting
+- Formatting
+- Tests
+- Migrations
+- README
+- Docker Compose
+
+---
+
+# 17. AI Product Requirements
+
+## AI-001: Document Type Classification
+
+Model should classify document type.
+
+Use:
+
+- File name
+- First page text
+- Layout heuristics
+- LLM classification
+
+Output:
+
+```json
+{
+  "document_type": "commercial_invoice",
+  "confidence": 0.93,
+  "reason": "Document contains invoice number, supplier, buyer, line items and total value."
+}
+```
+
+---
+
+## AI-002: Field Extraction
+
+Use:
+
+- OCR
+- Text layout parsing
+- LLM structured extraction
+- Validation layer
+
+Output must be JSON conforming to schema.
+
+Do not allow free-form unvalidated output.
+
+---
+
+## AI-003: Line Item Normalization
+
+System should normalize:
+
+- Units:
+  - pcs, pieces, units, each
+  - kg, kgs, kilogram
+  - l, litre
+  - m, meter
+- Currency
+- Dates
+- Numbers
+- Weights
+
+---
+
+## AI-004: HS/SARS Classification
+
+Classification pipeline:
+
+1. Normalize product description.
+2. Extract attributes:
+   - material
+   - function
+   - form
+   - use
+   - composition
+   - voltage, if relevant
+3. Retrieve candidate tariff records using vector search.
+4. Ask LLM to rank candidates.
+5. Validate against deterministic rules.
+6. Return top candidates.
+
+---
+
+## AI-005: Confidence Thresholds
+
+- Auto-suggest: >= 0.85
+- Review suggested: 0.60 to 0.84
+- Mandatory review: < 0.60
+
+High-risk categories always require review regardless of confidence.
+
+---
+
+## AI-006: Feedback Loop
+
+Store:
+
+- AI suggested code
+- User accepted code
+- User override reason
+- Product category
+- Customer industry
+- Origin/destination
+
+Use later for:
+
+- Retrieval ranking
+- Prompt tuning
+- Fine-tuning
+- Evaluation benchmarks
+
+---
+
+## AI-007: Guardrails
+
+System must not:
+
+- Invent HS codes.
+- Ignore deterministic compliance errors.
+- Present estimates as final SARS assessment.
+- Allow unapproved autonomous submission.
+- Use confidential client data in public prompts if prohibited.
+
+---
+
+# 18. South African Compliance Requirements
+
+Important: This product should provide decision support, not replace a licensed customs broker or legal advice.
+
+## SARS-related
+
+- HS/SARS tariff classification.
+- Customs valuation flags.
+- VAT estimation.
+- Duty estimation.
+- Anti-dumping risk flags.
+- Bill of Entry draft data.
+
+## ITAC-related
+
+- Import/export permit requirements.
+- Rebate item flags.
+- Controlled goods flags.
+
+## NRCS-related
+
+- Letter of Authority flags for regulated products.
+- Compulsory specification flags.
+
+## SADC-related
+
+- Certificate of origin checks.
+- Preferential duty flags.
+- Origin consistency checks.
+
+## Dangerous goods
+
+- UN number detection.
+- MSDS requirement.
+- Battery/chemical flags.
+- Missing dangerous goods declaration.
+
+## POPIA
+
+- Data minimization.
+- Access control.
+- Audit logs.
+- Retention rules.
+- Deletion requests.
+
+---
+
+# 19. UX Requirements
+
+## Screen 1: Login
+
+Fields:
+
+- Email
+- Password
+
+Actions:
+
+- Login
+- Forgot password
+
+---
+
+## Screen 2: Organization Selection
+
+If user belongs to multiple orgs:
+
+- Select organization
+- Create organization
+
+---
+
+## Screen 3: Dashboard
+
+Cards:
+
+- Shipments this month
+- Needs review
+- High risk
+- Completed
+- Average processing time
+
+Charts:
+
+- Shipments by status
+- Risk distribution
+- Classification acceptance rate
+
+Recent activity table.
+
+---
+
+## Screen 4: Shipments List
+
+Columns:
+
+- Reference
+- Type
+- Importer/Exporter
+- Origin/Destination
+- Status
+- Risk
+- Documents
+- Created
+- Assigned user
+
+Actions:
+
+- New shipment
+- Bulk upload
+- Export CSV
+
+---
+
+## Screen 5: New Shipment
+
+Form:
+
+- Shipment type
+- Transport mode
+- Origin country
+- Destination country
+- Port of loading
+- Port of discharge
+- Border post
+- Incoterms
+- Currency
+- Importer
+- Exporter
+- Supplier
+- Clearing agent
+- Reference
+
+---
+
+## Screen 6: Shipment Detail
+
+Tabs:
+
+1. Overview
+2. Documents
+3. Extraction
+4. Classification
+5. Compliance
+6. Duties
+7. Packet
+8. Audit
+
+---
+
+## Screen 7: Documents Tab
+
+Features:
+
+- Upload button
+- Document list
+- Status badges:
+  - pending
+  - extracting
+  - extracted
+  - failed
+  - needs_review
+- Preview
+- Delete
+- Reclassify
+- Reprocess
+
+---
+
+## Screen 8: Extraction Tab
+
+Layout:
+
+- Left: document preview
+- Right: extracted fields
+
+Fields show:
+
+- Value
+- Confidence badge
+- Source document
+- Edit button
+
+Line items table:
+
+- Description
+- Quantity
+- Unit price
+- Total
+- HS suggestion
+- Flags
+
+---
+
+## Screen 9: Classification Tab
+
+For each line item:
+
+- Product description
+- AI top 5 candidates
+- Confidence
+- Reasoning
+- Duty rate
+- Permit flags
+- Accept button
+- Override button
+- Notes
+
+---
+
+## Screen 10: Compliance Tab
+
+Show:
+
+- Critical errors
+- Warnings
+- Info
+- Missing documents
+- Required permits
+- Recommended actions
+
+Each issue:
+
+- Severity badge
+- Message
+- Related line/document
+- Resolve button
+
+---
+
+## Screen 11: Duties Tab
+
+Show:
+
+- Customs value
+- Duty
+- VAT
+- Levies
+- Anti-dumping placeholder
+- Total estimate
+- Exchange rate
+- Assumptions
+- Disclaimer
+
+---
+
+## Screen 12: Packet Tab
+
+Actions:
+
+- Generate PDF
+- Download JSON
+- Download CSV
+- Send to API
+- Copy MCP resource link
+
+Show:
+
+- Approval status
+- Generated by
+- Generated at
+- Version
+
+---
+
+## Screen 13: Audit Log
+
+Table:
+
+- Time
+- User
+- Action
+- Entity
+- Before/after
+- Metadata
+
+---
+
+## Screen 14: Settings
+
+Sections:
+
+- Profile
+- Organization
+- Team
+- API keys
+- Billing
+- Compliance defaults
+- Notification settings
+
+---
+
+## Screen 15: Admin Panel
+
+Sections:
+
+- Organizations
+- Users
+- Tariff records
+- Rules
+- Exchange rates
+- Feature flags
+- Usage
+- Audit logs
+
+---
+
+# 20. Recommended Tech Stack
+
+## Prototype / MVP Stack
+
+### Frontend
+
+- Next.js 14+
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- TanStack Query
+- Zod
+- React Hook Form
+
+### Backend
+
+- Python 3.12
+- FastAPI
+- SQLAlchemy 2.0
+- Pydantic v2
+- Alembic
+- Celery
+- Redis
+
+### Database
+
+- PostgreSQL 16
+- pgvector
+
+### File Storage
+
+- Local: MinIO or local filesystem
+- Production: AWS S3 in af-south-1 or Azure Blob South Africa
+
+### OCR / Document Parsing
+
+Prototype:
+
+- pdfplumber
+- PyMuPDF
+- Tesseract OCR
+
+Production recommendation:
+
+- Azure Document Intelligence
+- AWS Textract
+- Google Document AI
+
+Use abstraction layer so provider can be swapped.
+
+### LLM
+
+Prototype:
+
+- OpenAI-compatible API
+- Anthropic Claude optional
+- Local Ollama optional for privacy-sensitive testing
+
+Production:
+
+- Azure OpenAI, AWS Bedrock, or private deployment where appropriate
+
+Important:
+
+- Do not send sensitive customer documents to public AI services without proper legal basis and customer consent.
+
+### Vector Search
+
+- pgvector
+
+### Authentication
+
+- FastAPI JWT auth
+- Argon2 password hashing
+
+### API Documentation
+
+- OpenAPI/Swagger
+
+### Background Jobs
+
+- Celery
+- Redis broker
+
+### Testing
+
+- pytest
+- factoryboy
+- Playwright for E2E
+- httpx for API tests
+
+### Code Quality
+
+- Ruff
+- Black
+- MyPy
+- ESLint
+- Prettier
+
+### Infrastructure
+
+- Docker
+- Docker Compose
+- Makefile
+- GitHub Actions
+
+### Observability
+
+- Structured logs
+- Sentry
+- Prometheus/Grafana later
+- OpenTelemetry later
+
+---
+
+# 21. High-Level Architecture
+
+```text
+Browser
+  |
+Next.js Frontend
+  |
+REST API
+  |
+FastAPI Backend
+  |
++----------------+----------------+------------------+
+|                |                |                  |
+PostgreSQL     Redis Queue      Object Storage     AI Services
+|                |                |                  |
+|             Celery Jobs       OCR Provider       LLM Provider
+|                |
+|                +-- Extraction Worker
+|                +-- Classification Worker
+|                +-- Compliance Worker
+|                +-- Packet Worker
+|
++-- Tariff DB
++-- Rule Engine
++-- Audit Logs
++-- Usage Metering
+```
+
+---
+
+# 22. Service Boundaries
+
+## Core API
+
+Handles:
+
+- Auth
+- Organizations
+- Users
+- Shipments
+- Documents
+- Reviews
+- Reports
+- API keys
+
+## Worker Service
+
+Handles:
+
+- OCR
+- Extraction
+- Classification
+- Compliance checks
+- Packet generation
+
+## AI Service Layer
+
+Handles:
+
+- LLM calls
+- Prompt templates
+- JSON schema validation
+- Confidence normalization
+
+## Rule Engine
+
+Handles:
+
+- Deterministic checks
+- Tariff validation
+- Permit flags
+- Missing document rules
+
+## Storage Service
+
+Handles:
+
+- File upload
+- Presigned URLs
+- File metadata
+- Retention
+
+---
+
+# 23. Database Schema
+
+Below is a practical schema.
+
+Use UUID primary keys.
+
+---
+
+## organizations
+
+```sql
+CREATE TABLE organizations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  plan TEXT DEFAULT 'starter',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## users
+
+```sql
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  full_name TEXT,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## memberships
+
+```sql
+CREATE TABLE memberships (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  user_id UUID REFERENCES users(id),
+  role TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE (organization_id, user_id)
+);
+```
+
+---
+
+## api_keys
+
+```sql
+CREATE TABLE api_keys (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  name TEXT NOT NULL,
+  key_hash TEXT NOT NULL,
+  last_used_at TIMESTAMPTZ,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## parties
+
+```sql
+CREATE TABLE parties (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  party_type TEXT NOT NULL,
+  name TEXT NOT NULL,
+  registration_number TEXT,
+  vat_number TEXT,
+  customs_code TEXT,
+  address_line1 TEXT,
+  city TEXT,
+  postal_code TEXT,
+  country TEXT,
+  email TEXT,
+  phone TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## shipments
+
+```sql
+CREATE TABLE shipments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  reference TEXT NOT NULL,
+  shipment_type TEXT NOT NULL,
+  transport_mode TEXT NOT NULL,
+  status TEXT DEFAULT 'draft',
+  risk_level TEXT DEFAULT 'low',
+  origin_country TEXT,
+  destination_country TEXT,
+  port_of_loading TEXT,
+  port_of_discharge TEXT,
+  border_post TEXT,
+  incoterms TEXT,
+  currency TEXT,
+  invoice_date DATE,
+  estimated_arrival_date DATE,
+  importer_party_id UUID REFERENCES parties(id),
+  exporter_party_id UUID REFERENCES parties(id),
+  supplier_party_id UUID REFERENCES parties(id),
+  consignee_party_id UUID REFERENCES parties(id),
+  clearing_agent_party_id UUID REFERENCES parties(id),
+  created_by UUID REFERENCES users(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## documents
+
+```sql
+CREATE TABLE documents (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  shipment_id UUID REFERENCES shipments(id),
+  document_type TEXT,
+  file_key TEXT NOT NULL,
+  file_name TEXT,
+  content_type TEXT,
+  file_size_bytes BIGINT,
+  classification_confidence NUMERIC,
+  extraction_status TEXT DEFAULT 'pending',
+  created_by UUID REFERENCES users(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## extracted_fields
+
+```sql
+CREATE TABLE extracted_fields (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  document_id UUID REFERENCES documents(id),
+  shipment_id UUID REFERENCES shipments(id),
+  field_name TEXT NOT NULL,
+  field_value JSONB,
+  confidence NUMERIC,
+  source_page INTEGER,
+  verified BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## line_items
+
+```sql
+CREATE TABLE line_items (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  shipment_id UUID REFERENCES shipments(id),
+  document_id UUID REFERENCES documents(id),
+  line_number INTEGER,
+  description TEXT,
+  sku TEXT,
+  quantity NUMERIC,
+  unit_of_measure TEXT,
+  unit_price NUMERIC,
+  total_price NUMERIC,
+  currency TEXT,
+  weight_kg NUMERIC,
+  country_of_origin TEXT,
+  hs_code_suggested TEXT,
+  final_hs_code TEXT,
+  confidence NUMERIC,
+  needs_review BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## classification_candidates
+
+```sql
+CREATE TABLE classification_candidates (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  line_item_id UUID REFERENCES line_items(id),
+  hs_code TEXT NOT NULL,
+  sa_tariff_code TEXT,
+  description TEXT,
+  confidence NUMERIC,
+  reasoning TEXT,
+  duty_rate NUMERIC,
+  vat_rate NUMERIC,
+  permit_flags JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## compliance_checks
+
+```sql
+CREATE TABLE compliance_checks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  shipment_id UUID REFERENCES shipments(id),
+  line_item_id UUID REFERENCES line_items(id),
+  document_id UUID REFERENCES documents(id),
+  rule_pack TEXT,
+  rule_name TEXT,
+  severity TEXT NOT NULL,
+  status TEXT DEFAULT 'open',
+  message TEXT,
+  recommended_action TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  resolved_at TIMESTAMPTZ,
+  resolved_by UUID REFERENCES users(id)
+);
+```
+
+---
+
+## duty_estimates
+
+```sql
+CREATE TABLE duty_estimates (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  shipment_id UUID REFERENCES shipments(id),
+  currency TEXT,
+  customs_value NUMERIC,
+  exchange_rate NUMERIC,
+  customs_duty NUMERIC,
+  vat NUMERIC,
+  excise NUMERIC,
+  levies NUMERIC,
+  anti_dumping_placeholder NUMERIC,
+  total_estimated NUMERIC,
+  assumptions JSONB,
+  disclaimer TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## audit_logs
+
+```sql
+CREATE TABLE audit_logs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  user_id UUID REFERENCES users(id),
+  action TEXT NOT NULL,
+  entity_type TEXT,
+  entity_id UUID,
+  before_value JSONB,
+  after_value JSONB,
+  metadata JSONB,
+  ip_address TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## tariff_records
+
+```sql
+CREATE TABLE tariff_records (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  hs_code TEXT NOT NULL,
+  sa_tariff_code TEXT,
+  description TEXT NOT NULL,
+  chapter TEXT,
+  heading TEXT,
+  subheading TEXT,
+  duty_rate NUMERIC,
+  vat_rate NUMERIC DEFAULT 15,
+  unit_of_measure TEXT,
+  origin_notes TEXT,
+  permit_notes TEXT,
+  active BOOLEAN DEFAULT TRUE,
+  effective_from DATE,
+  effective_to DATE,
+  embedding VECTOR(1536),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## compliance_rules
+
+```sql
+CREATE TABLE compliance_rules (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  rule_pack TEXT NOT NULL,
+  rule_code TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  description TEXT,
+  severity TEXT NOT NULL,
+  condition JSONB NOT NULL,
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## usage_events
+
+```sql
+CREATE TABLE usage_events (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id),
+  event_type TEXT NOT NULL,
+  shipment_id UUID,
+  document_id UUID,
+  metadata JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+# 24. API Specification
+
+Base URL:
+
+```text
+/api/v1
+```
+
+Authentication:
+
+```text
+Authorization: Bearer <token>
+```
+
+Or API key:
+
+```text
+X-API-Key: <api_key>
+```
+
+---
+
+## Auth
+
+### POST /auth/register
+
+Request:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "StrongPassword123!",
+  "full_name": "Test User"
+}
+```
+
+### POST /auth/login
+
+Request:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "StrongPassword123!"
+}
+```
+
+Response:
+
+```json
+{
+  "access_token": "jwt",
+  "refresh_token": "jwt",
+  "token_type": "bearer"
+}
+```
+
+---
+
+## Organizations
+
+### POST /organizations
+
+Request:
+
+```json
+{
+  "name": "Durban Clearing Agents",
+  "slug": "durban-clearing"
+}
+```
+
+### GET /organizations/me
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "name": "Durban Clearing Agents",
+  "slug": "durban-clearing",
+  "plan": "starter"
+}
+```
+
+---
+
+## Shipments
+
+### POST /shipments
+
+Request:
+
+```json
+{
+  "reference": "IMP-2026-001",
+  "shipment_type": "import",
+  "transport_mode": "sea",
+  "origin_country": "CN",
+  "destination_country": "ZA",
+  "port_of_loading": "Shanghai",
+  "port_of_discharge": "Durban",
+  "incoterms": "FOB",
+  "currency": "USD"
+}
+```
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "reference": "IMP-2026-001",
+  "status": "draft"
+}
+```
+
+---
+
+### GET /shipments
+
+Query params:
+
+```text
+status
+risk_level
+shipment_type
+date_from
+date_to
+search
+page
+page_size
+```
+
+---
+
+### GET /shipments/{id}
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "reference": "IMP-2026-001",
+  "status": "needs_review",
+  "risk_level": "medium",
+  "shipment_type": "import",
+  "transport_mode": "sea",
+  "origin_country": "CN",
+  "destination_country": "ZA"
+}
+```
+
+---
+
+## Documents
+
+### POST /shipments/{shipment_id}/documents
+
+Multipart form:
+
+```text
+file: invoice.pdf
+document_type: commercial_invoice
+```
+
+Response:
+
+```json
+{
+  "document_id": "uuid",
+  "extraction_status": "pending"
+}
+```
+
+---
+
+### POST /documents/{document_id}/process
+
+Start extraction.
+
+Response:
+
+```json
+{
+  "document_id": "uuid",
+  "extraction_status": "processing"
+}
+```
+
+---
+
+### GET /documents/{document_id}/extraction
+
+Response:
+
+```json
+{
+  "document_id": "uuid",
+  "status": "completed",
+  "document_type": "commercial_invoice",
+  "fields": {
+    "invoice_number": "INV-8899",
+    "invoice_date": "2026-01-15",
+    "supplier_name": "Shenzhen Solar Co",
+    "buyer_name": "Cape Town Energy Supplies",
+    "currency": "USD",
+    "total_value": 15500.00,
+    "incoterms": "FOB"
+  },
+  "line_items": [
+    {
+      "line_number": 1,
+      "description": "550W monocrystalline solar panel",
+      "quantity": 100,
+      "unit_price": 105.00,
+      "total_price": 10500.00
+    },
+    {
+      "line_number": 2,
+      "description": "5kW hybrid inverter",
+      "quantity": 10,
+      "unit_price": 500.00,
+      "total_price": 5000.00
+    }
+  ],
+  "confidence": {
+    "invoice_number": 0.98,
+    "total_value": 0.94,
+    "line_items": 0.82
+  }
+}
+```
+
+---
+
+## Classification
+
+### POST /shipments/{shipment_id}/classify
+
+Request:
+
+```json
+{
+  "line_item_ids": ["uuid"],
+  "destination_country": "ZA"
+}
+```
+
+Response:
+
+```json
+{
+  "line_item_id": "uuid",
+  "candidates": [
+    {
+      "hs_code": "8541.40",
+      "sa_tariff_code": "8541.40.01",
+      "description": "Photosensitive semiconductor devices, including photovoltaic cells",
+      "confidence": 0.91,
+      "reasoning": "Solar panels are photovoltaic devices.",
+      "duty_rate": 0,
+      "vat_rate": 15,
+      "permit_flags": ["nrcs_check_may_apply"]
+    }
+  ]
+}
+```
+
+---
+
+## Compliance
+
+### POST /shipments/{shipment_id}/compliance/check
+
+Response:
+
+```json
+{
+  "shipment_id": "uuid",
+  "risk_level": "medium",
+  "checks": [
+    {
+      "rule_pack": "ITAC",
+      "rule_name": "import_permit_required_solar_inverter",
+      "severity": "warning",
+      "message": "Inverter may require ITAC permit or NRCS LOA.",
+      "recommended_action": "Verify regulatory approval before submission."
+    }
+  ]
+}
+```
+
+---
+
+## Duty Estimate
+
+### POST /shipments/{shipment_id}/estimate
+
+Response:
+
+```json
+{
+  "shipment_id": "uuid",
+  "currency": "ZAR",
+  "customs_value": 280000.00,
+  "customs_duty": 0.00,
+  "vat": 42000.00,
+  "levies": 0.00,
+  "total_estimated": 42000.00,
+  "disclaimer": "Estimate only. Final assessment subject to SARS."
+}
+```
+
+---
+
+## Packet
+
+### POST /shipments/{shipment_id}/packet
+
+Request:
+
+```json
+{
+  "format": ["pdf", "json", "csv"]
+}
+```
+
+Response:
+
+```json
+{
+  "packet_id": "uuid",
+  "pdf_url": "/files/packet.pdf",
+  "json_url": "/files/packet.json",
+  "csv_url": "/files/packet.csv"
+}
+```
+
+---
+
+## Tariff Search
+
+### GET /tariffs/search?q=solar%20panel
+
+Response:
+
+```json
+{
+  "results": [
+    {
+      "hs_code": "8541.40",
+      "sa_tariff_code": "8541.40.01",
+      "description": "Photosensitive semiconductor devices, including photovoltaic cells",
+      "duty_rate": 0,
+      "vat_rate": 15
+    }
+  ]
+}
+```
+
+---
+
+# 25. Background Jobs
+
+## Job 1: document_extraction
+
+Input:
+
+- document_id
+
+Steps:
+
+1. Fetch file.
+2. Run OCR.
+3. Normalize text.
+4. Detect document type.
+5. Extract fields.
+6. Validate fields.
+7. Store extracted_fields.
+8. Store line_items.
+9. Update document status.
+10. Emit event.
+
+---
+
+## Job 2: shipment_classification
+
+Input:
+
+- shipment_id
+
+Steps:
+
+1. Load line items.
+2. Normalize descriptions.
+3. Retrieve tariff candidates.
+4. Run LLM ranking.
+5. Store classification_candidates.
+6. Update line item confidence.
+7. Trigger compliance check.
+
+---
+
+## Job 3: compliance_check
+
+Input:
+
+- shipment_id
+
+Steps:
+
+1. Load shipment, line items, documents.
+2. Run rule packs.
+3. Store compliance_checks.
+4. Update shipment risk.
+5. Notify if critical.
+
+---
+
+## Job 4: duty_estimation
+
+Input:
+
+- shipment_id
+
+Steps:
+
+1. Load approved classifications.
+2. Calculate customs value.
+3. Apply exchange rate.
+4. Estimate duty/VAT.
+5. Store estimate.
+
+---
+
+## Job 5: packet_generation
+
+Input:
+
+- shipment_id
+- formats
+
+Steps:
+
+1. Load all data.
+2. Validate approvals.
+3. Generate PDF.
+4. Generate JSON/CSV.
+5. Store files.
+6. Log audit event.
+
+---
+
+# 26. AI Pipeline Details
+
+## Extraction Pipeline
+
+```text
+File
+  |
+OCR Provider
+  |
+Raw Text + Layout
+  |
+Preprocessing
+  |
+LLM Structured Extraction
+  |
+Zod/Pydantic Validation
+  |
+Confidence Scoring
+  |
+Database
+```
+
+---
+
+## Classification Pipeline
+
+```text
+Line Item Description
+  |
+Attribute Extraction
+  |
+Vector Search over Tariff Records
+  |
+Top 20 Candidates
+  |
+LLM Ranking with Rule Context
+  |
+Deterministic Validation
+  |
+Top 5 Candidates
+```
+
+---
+
+## Compliance Pipeline
+
+```text
+Shipment + Line Items + Documents
+  |
+Rule Engine
+  |
+Severity Scoring
+  |
+Risk Score
+  |
+Human Review Queue
+```
+
+---
+
+# 27. Prompt Templates
+
+## Document Extraction Prompt
+
+```text
+You are a trade document extraction engine.
+
+Extract structured data from the document text below.
+
+Return only valid JSON matching the provided schema.
+
+Do not invent fields.
+If a field is missing, return null.
+Normalize dates to YYYY-MM-DD.
+Normalize currency to ISO 4217.
+Extract all line items.
+
+Document type: {document_type}
+
+Schema:
+{json_schema}
+
+Document text:
+{document_text}
+```
+
+---
+
+## HS Classification Prompt
+
+```text
+You are a customs tariff classification assistant for South African imports.
+
+Use only the candidate tariff records provided.
+Do not invent HS codes.
+Rank the candidates from most likely to least likely.
+Consider product description, material, function, form, and use.
+If ambiguous, lower the confidence and explain what information is missing.
+
+Product description:
+{description}
+
+Extracted attributes:
+{attributes}
+
+Candidate tariff records:
+{candidates}
+
+Return JSON:
+{
+  "candidates": [
+    {
+      "hs_code": string,
+      "sa_tariff_code": string,
+      "confidence": number,
+      "reasoning": string
+    }
+  ],
+  "missing_information": [string]
+}
+```
+
+---
+
+## Compliance Explanation Prompt
+
+```text
+You are a trade compliance explainer.
+
+Given the shipment data and triggered rules, explain the issue in plain English.
+Do not provide legal advice.
+Do not invent requirements.
+If unsure, say verification is required.
+
+Shipment data:
+{shipment_json}
+
+Triggered rules:
+{rules_json}
+
+Return JSON:
+{
+  "summary": string,
+  "issues": [
+    {
+      "severity": string,
+      "message": string,
+      "recommended_action": string
+    }
+  ]
+}
+```
+
+---
+
+# 28. Security Requirements
+
+## Authentication
+
+- JWT access token short-lived.
+- Refresh token rotation.
+- Password hashing with Argon2.
+- Optional 2FA later.
+
+## Authorization
+
+- Every endpoint checks organization membership.
+- Role-based permission checks.
+- API keys hashed.
+
+## Data Protection
+
+- TLS 1.3.
+- Encryption at rest.
+- Secure file storage.
+- Signed URLs for downloads.
+- Retention policies.
+
+## File Upload Safety
+
+- Allowed MIME types.
+- Max file size.
+- Virus scan optional.
+- No executable files.
+
+## API Safety
+
+- Rate limiting.
+- Request validation.
+- Audit logging.
+- API key scoping.
+
+---
+
+# 29. POPIA Requirements
+
+Implement:
+
+- Consent capture where necessary.
+- Data minimization.
+- Access request workflow.
+- Correction request workflow.
+- Deletion request workflow.
+- Retention schedule.
+- Operator agreement template.
+- Cross-border AI processing disclosure.
+
+Important:
+
+- Customer trade documents may contain personal information such as names, emails, and phone numbers.
+- Do not use customer documents for model training unless customer opts in.
+
+---
+
+# 30. Metrics and Analytics
+
+## Product Metrics
+
+- Shipments created
+- Documents processed
+- Extraction success rate
+- Field-level accuracy
+- Classification acceptance rate
+- Override rate
+- Time from upload to packet
+- Compliance flags caught
+- Error rate
+
+## Business Metrics
+
+- MRR
+- ARR
+- Active organizations
+- Shipments per organization
+- Churn
+- Net revenue retention
+- CAC
+- Payback period
+
+## AI Metrics
+
+- Top-1 HS accuracy
+- Top-5 HS accuracy
+- Confidence calibration
+- False positive compliance flags
+- False negative compliance flags
+
+## Operational Metrics
+
+- API latency
+- Worker queue length
+- OCR failure rate
+- LLM failure rate
+- Job retry rate
+
+---
+
+# 31. Definition of Done for MVP
+
+The MVP is complete when:
+
+1. A user can register and create an organization.
+2. A user can create a shipment.
+3. A user can upload invoice and packing list.
+4. System extracts fields with confidence scores.
+5. System extracts line items.
+6. System recommends HS/SARS codes.
+7. User can accept or override codes.
+8. System runs compliance checks.
+9. System estimates duty/VAT.
+10. System generates PDF/JSON packet.
+11. Audit logs record major actions.
+12. API can create shipment and retrieve packet.
+13. Docker Compose runs full stack locally.
+14. Basic tests pass.
+15. README explains setup.
+
+---
+
+# 32. Repository Structure
+
+```text
+tradecomply-za/
+├── apps/
+│   ├── web/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── lib/
+│   │   ├── hooks/
+│   │   ├── styles/
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── api/
+│       ├── app/
+│       │   ├── main.py
+│       │   ├── core/
+│       │   ├── models/
+│       │   ├── schemas/
+│       │   ├── routers/
+│       │   ├── services/
+│       │   ├── ai/
+│       │   ├── rules/
+│       │   ├── workers/
+│       │   └── utils/
+│       ├── alembic/
+│       ├── tests/
+│       ├── pyproject.toml
+│       └── Dockerfile
+├── packages/
+│   └── shared-types/
+├── scripts/
+│   ├── seed.py
+│   ├── create_org.py
+│   └── generate_samples.py
+├── infra/
+│   ├── docker-compose.yml
+│   └── .env.example
+├── tests/
+├── Makefile
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 33. Local Development Setup
+
+## Prerequisites
+
+- Docker
+- Docker Compose
+- Python 3.12
+- Node.js 20+
+- Make optional
+
+## Environment Variables
+
+```env
+APP_ENV=development
+SECRET_KEY=change_me
+DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/tradecomply_za
+REDIS_URL=redis://localhost:6379
+OPENAI_API_KEY=your_key_or_mock
+ANTHROPIC_API_KEY=optional
+OCR_PROVIDER=local
+LLM_PROVIDER=openai
+S3_ENDPOINT=http://localhost:9000
+S3_BUCKET=tradecomply
+S3_ACCESS_KEY=minioadmin
+S3_SECRET_KEY=minioadmin
+```
+
+---
+
+## Docker Compose Services
+
+```yaml
+services:
+  db:
+    image: postgres:16
+  redis:
+    image: redis:7
+  minio:
+    image: minio/minio
+  api:
+    build: ./apps/api
+  worker:
+    build: ./apps/api
+    command: celery -A app.workers.celery_app worker
+  web:
+    build: ./apps/web
+```
+
+---
+
+# 34. Test Plan
+
+## Unit Tests
+
+- Auth token generation
+- Role permission checks
+- Field validation
+- Duty calculation
+- Rule engine
+- Classification candidate validation
+
+## Integration Tests
+
+- Create org/user
+- Create shipment
+- Upload document
+- Trigger extraction
+- Retrieve extraction
+- Classify line item
+- Run compliance
+- Generate packet
+
+## E2E Tests
+
+- Login
+- Create shipment
+- Upload sample invoice
+- Review extraction
+- Accept classification
+- Generate packet
+- Download PDF
+
+## AI Evaluation Tests
+
+Use golden dataset:
+
+- 50 commercial invoices
+- 50 packing lists
+- 20 bills of lading
+- 20 certificates of origin
+- 10 dangerous goods documents
+
+Measure:
+
+- Field accuracy
+- Line item accuracy
+- HS top-1
+- HS top-5
+- False compliance flags
+
+---
+
+# 35. Seed Data
+
+Create seed data for:
+
+- Organization:
+  - Durban Clearing Agents
+
+Users:
+
+- owner@example.com
+- compliance@example.com
+- clerk@example.com
+
+Parties:
+
+- Importer: Cape Town Energy Supplies
+- Supplier: Shenzhen Solar Co
+- Clearing agent: Durban Clearing Agents
+
+Shipments:
+
+- Import solar panels into Durban
+- Import electronics via OR Tambo
+- Export machinery to Zimbabwe
+
+Tariff records:
+
+- Solar panels
+- Inverters
+- Lithium batteries
+- Textiles
+- Steel products
+- Machinery parts
+
+Rules:
+
+- Missing invoice
+- Missing packing list
+- ITAC permit required
+- NRCS LOA required
+- Dangerous goods missing declaration
+- SADC certificate missing
+
+---
+
+# 36. Go-To-Market Plan
+
+## Phase 1: Design Partners
+
+Target:
+
+- 3 clearing agents
+- 2 freight forwarders
+- 2 importers
+
+Offer:
+
+- Free pilot for 30 days
+- White-glove onboarding
+- Custom workflow setup
+
+Ask for:
+
+- Sample documents
+- Weekly feedback
+- Willingness-to-pay validation
+- Testimonial if successful
+
+---
+
+## Phase 2: Niche Corridor
+
+Pick:
+
+> Durban imports + Gauteng clearing agents.
+
+Build case study:
+
+> “Reduced pre-clearance prep time from 45 minutes to 8 minutes per shipment.”
+
+---
+
+## Phase 3: Outbound Sales
+
+Channels:
+
+- LinkedIn
+- Freight forwarding associations
+- Customs broker networks
+- Trade exhibitions
+- Transport associations
+
+Sales message:
+
+> “Catch missing ITAC/NRCS permits and HS errors before SARS submission.”
+
+---
+
+## Phase 4: Integrations
+
+Integrate with:
+
+- Clearing agent EDI workflows
+- Freight management systems
+- Accounting systems
+- Client portals
+- Transport tracking systems
+
+---
+
+# 37. Risks and Mitigations
+
+## Risk 1: SARS/EDI complexity
+
+Mitigation:
+
+- Do not attempt direct submission first.
+- Be pre-clearance layer.
+- Partner with clearing agents.
+
+---
+
+## Risk 2: AI extraction errors
+
+Mitigation:
+
+- Confidence scores.
+- Human review.
+- Audit logs.
+- Golden test dataset.
+
+---
+
+## Risk 3: Legal/customs liability
+
+Mitigation:
+
+- Disclaimers.
+- Human approval.
+- No autonomous filing.
+- Licensed broker review.
+
+---
+
+## Risk 4: Data privacy
+
+Mitigation:
+
+- POPIA compliance.
+- Encryption.
+- Tenant isolation.
+- Customer consent.
+
+---
+
+## Risk 5: Tariff data freshness
+
+Mitigation:
+
+- Admin-managed tariff records.
+- Versioning.
+- Effective dates.
+- Future automated tariff feed.
+
+---
+
+## Risk 6: Long sales cycles
+
+Mitigation:
+
+- Start with mid-market agents.
+- Pilot pricing.
+- Prove ROI quickly.
+
+---
+
+# 38. Future Expansion
+
+## Product expansion
+
+- Export compliance
+- Transit compliance
+- SADC certificates
+- AfCFTA certificates
+- Anti-dumping intelligence
+- Bond movement tracking
+- Client portal for importers
+- WhatsApp shipment status
+- Customs EDI integration
+- Trade finance scoring
+
+## Geographic expansion
+
+From South Africa to:
+
+- Zimbabwe
+- Botswana
+- Namibia
+- Mozambique
+- Zambia
+- DRC
+- Kenya
+- Nigeria
+- Ghana
+
+---
+
+# 39. Billion-Dollar Requirements
+
+To become a major platform, TradeComply AI ZA must eventually have:
+
+1. **Proprietary trade data moat**
+   - Classified shipments
+   - Corrections
+   - Permit outcomes
+   - Corridor patterns
+
+2. **Workflow lock-in**
+   - Client-specific pipelines
+   - Approval chains
+   - Document routing
+
+3. **API/MCP infrastructure**
+   - Let clients build custom reports and automations.
+
+4. **Compliance trust**
+   - Auditability
+   - Explainability
+   - Security certifications later
+
+5. **Network effects**
+   - More shipments improve AI.
+   - More brokers attract more importers.
+   - More data improves risk prediction.
+
+6. **Expansion into finance**
+   - Verified trade documents can power invoice financing, trade credit, and insurance.
+
+---
+
+# 40. Master Build Prompt
+
+Copy and paste the following into your coding IDE / AI agent.
+
+---
+
+## MASTER BUILD PROMPT
+
+```text
+You are a principal full-stack SaaS engineer and AI systems architect.
+
+Build a complete MVP for “TradeComply AI South Africa”, a B2B SaaS platform that helps South African freight forwarders, clearing agents, importers, and exporters automate trade document extraction, HS/SARS tariff classification, compliance checks, duty estimation, and customs-ready packet generation.
+
+IMPORTANT PRODUCT CONSTRAINTS:
+- Do not build direct submission to SARS.
+- Do not provide legal advice.
+- All AI outputs must be reviewable by humans.
+- Use deterministic rule engine for compliance where possible.
+- Use AI for extraction and classification suggestions, not final legal decisions.
+- Build for South Africa first.
+- Include POPIA-conscious data handling.
+- Use multi-tenant organization isolation.
+- Build a local Docker Compose development environment.
+- If external API keys are missing, use mock providers.
+
+TECH STACK:
+Frontend:
+- Next.js 14+ App Router
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- TanStack Query
+- React Hook Form
+- Zod
+
+Backend:
+- Python 3.12
+- FastAPI
+- SQLAlchemy 2.0
+- Pydantic v2
+- Alembic
+- Celery
+- Redis
+
+Database:
+- PostgreSQL 16
+- pgvector extension
+
+Storage:
+- Local MinIO/S3-compatible storage for files
+
+OCR:
+- Local OCR abstraction layer
+- Provider interface supporting local pdfplumber/Tesseract mock and future Azure Document Intelligence
+
+LLM:
+- Provider abstraction layer
+- Default mock LLM if no API key
+- Optional OpenAI-compatible provider if OPENAI_API_KEY exists
+
+Testing:
+- pytest for backend
+- API integration tests
+- Basic frontend tests
+- Playwright optional
+
+Code quality:
+- Typed Python
+- Ruff
+- Black
+- ESLint
+- Prettier
+
+Repository structure:
+tradecomply-za/
+├── apps/
+│   ├── web/
+│   └── api/
+├── packages/
+├── scripts/
+├── infra/
+├── tests/
+├── Makefile
+├── README.md
+└── .gitignore
+
+CORE FEATURES TO BUILD:
+
+1. Authentication:
+- Register
+- Login
+- JWT access and refresh tokens
+- Password hashing
+- Current user endpoint
+
+2. Organizations:
+- Create organization
+- Add users
+- Role-based access
+- Roles: owner, admin, compliance_manager, clerk, viewer, api_service
+
+3. Shipments:
+- Create shipment
+- List shipments
+- Get shipment detail
+- Update shipment
+- Shipment types: import, export, transit
+- Transport modes: sea, air, road, rail
+- Statuses: draft, documents_received, extracting, needs_review, compliance_ready, approved, packet_generated, completed, rejected, archived
+- Risk levels: low, medium, high, critical
+
+4. Parties:
+- Create parties
+- Importer, exporter, supplier, consignee, clearing agent
+- Attach parties to shipment
+
+5. Documents:
+- Upload documents to shipment
+- Store file metadata
+- Assign document type
+- Document types: commercial_invoice, packing_list, bill_of_lading, airway_bill, road_waybill, certificate_of_origin, import_permit, export_permit, nrcs_loa, dangerous_goods_declaration, msds, insurance_certificate, other
+- Trigger extraction job
+
+6. Extraction:
+- Create background job for document extraction
+- Extract header fields:
+  invoice_number, invoice_date, supplier_name, supplier_address, buyer_name, buyer_address, currency, incoterms, total_value, tax_amount, payment_terms, country_of_origin
+- Extract line items:
+  line_number, description, sku, quantity, unit_of_measure, unit_price, total_price, currency, weight_kg, country_of_origin
+- Store extracted fields with confidence
+- Store extraction status: pending, processing, completed, failed, needs_review
+
+7. Classification:
+- Create line item classification flow
+- Build tariff_records table with hs_code, sa_tariff_code, description, duty_rate, vat_rate, unit_of_measure, permit_notes, embedding
+- Implement simple vector search using pgvector
+- If vector search unavailable, use keyword search fallback
+- Return top 5 HS/SARS candidates with confidence and reasoning
+- Allow user to accept or override candidate
+- Store classification decision and audit log
+
+8. Compliance Rule Engine:
+- Build deterministic compliance_rules table
+- Implement rule packs:
+  SARS_TARIFF
+  ITAC_PERMITS
+  NRCS_LOA
+  SADC_ORIGIN
+  DANGEROUS_GOODS
+  VALUATION_ANOMALIES
+- Rules should check:
+  missing commercial invoice
+  missing packing list
+  missing certificate of origin where SADC preference claimed
+  dangerous goods keywords without dangerous goods declaration
+  regulated product keywords without NRCS LOA
+  controlled product keywords without ITAC permit
+  low confidence extraction fields
+  mismatched invoice total vs sum of line items
+- Store compliance_checks with severity: info, warning, error, critical
+
+9. Duty Estimation:
+- Calculate estimated customs duty and VAT
+- Use admin-configurable exchange rate table or mock rate
+- Default VAT 15%
+- Store duty_estimates with assumptions and disclaimer
+- Do not treat as final SARS assessment
+
+10. Packet Generation:
+- Generate compliance packet in JSON
+- Generate CSV
+- Generate simple PDF using reportlab or weasyprint
+- Packet includes:
+  shipment summary
+  parties
+  documents
+  extracted fields
+  line items
+  classification decisions
+  compliance checks
+  duty estimate
+  approval status
+  audit reference
+  disclaimer
+
+11. Dashboard:
+- Show shipment counts by status
+- Show high-risk shipments
+- Show needs review
+- Show recent activity
+
+12. Shipment UI:
+- Shipment list with search and filters
+- Shipment detail page with tabs:
+  Overview
+  Documents
+  Extraction
+  Classification
+  Compliance
+  Duties
+  Packet
+  Audit Log
+
+13. Document Review UI:
+- Show document metadata
+- Show extraction status
+- Show extracted fields with confidence badges
+- Allow manual correction
+- Allow marking field verified
+
+14. Classification Review UI:
+- Show line items
+- Show AI candidates
+- Show confidence and reasoning
+- Allow accept/override
+- Require reason for override
+
+15. Compliance UI:
+- Show issues by severity
+- Show recommended actions
+- Allow resolving issues
+
+16. API:
+- REST API under /api/v1
+- OpenAPI docs
+- API key authentication for external access
+- Endpoints:
+  POST /auth/register
+  POST /auth/login
+  POST /organizations
+  GET /organizations/me
+  POST /shipments
+  GET /shipments
+  GET /shipments/{id}
+  POST /shipments/{id}/documents
+  POST /documents/{id}/process
+  GET /documents/{id}/extraction
+  POST /shipments/{id}/classify
+  POST /shipments/{id}/compliance/check
+  POST /shipments/{id}/estimate
+  POST /shipments/{id}/packet
+  GET /tariffs/search
+
+17. Audit Logs:
+- Log all major actions
+- Immutable audit_logs table
+- Include user, organization, entity, action, before/after metadata
+
+18. Usage Metering:
+- Track shipment created
+- Track document processed
+- Track packet generated
+- Track API call
+
+19. Seed Data:
+- Create demo organization: Durban Clearing Agents
+- Create users:
+  owner@example.com
+  compliance@example.com
+  clerk@example.com
+- Create sample parties
+- Create sample shipments:
+  import solar panels via Durban
+  import electronics via OR Tambo
+  export machinery to Zimbabwe
+- Seed tariff records for:
+  solar panels
+  inverters
+  lithium batteries
+  machinery parts
+  textiles
+  steel products
+- Seed compliance rules
+
+20. Mock AI:
+- If no LLM key exists, return deterministic mock extraction and classification
+- Mock extraction should return realistic South African import invoice data
+- Mock classification should return top candidates from tariff_records
+
+21. Background Jobs:
+- Celery worker
+- Redis broker
+- Jobs:
+  document_extraction
+  shipment_classification
+  compliance_check
+  duty_estimation
+  packet_generation
+- Jobs should update status and create audit logs
+
+22. Error Handling:
+- API errors should return structured JSON
+- Validation errors should use Pydantic/Zod messages
+- Worker failures should log and set status failed
+
+23. Docker:
+- Dockerfile for web
+- Dockerfile for api
+- Docker Compose for:
+  postgres
+  redis
+  minio
+  api
+  worker
+  web
+- Include pgvector in postgres image or install extension
+- Include seed command
+
+24. Makefile:
+- make install
+- make up
+- make down
+- make migrate
+- make seed
+- make test
+- make lint
+- make format
+
+25. README:
+- Explain product
+- Explain setup
+- Explain environment variables
+- Explain demo login
+- Explain how to run tests
+
+26. Acceptance Tests:
+- User can register and login
+- User can create org
+- User can create shipment
+- User can upload document
+- Document extraction returns fields
+- Classification returns candidates
+- Compliance check returns issues
+- Duty estimate returns values
+- Packet can be generated
+
+BUILD PROCESS:
+1. Generate repo structure.
+2. Create backend skeleton.
+3. Create database models.
+4. Create auth.
+5. Create organizations and roles.
+6. Create shipments/parties/documents.
+7. Create background worker abstraction.
+8. Create mock OCR/LLM providers.
+9. Create extraction pipeline.
+10. Create classification pipeline.
+11. Create compliance rule engine.
+12. Create duty estimator.
+13. Create packet generator.
+14. Create frontend app.
+15. Connect frontend to API.
+16. Add seed data.
+17. Add tests.
+18. Ensure docker-compose runs.
+19. Ensure README is complete.
+
+Do not ask clarifying questions unless blocked by a missing dependency. Make reasonable assumptions and document them in README.
+
+The output should be a runnable monorepo with working MVP features.
+```
+
+---
+
+# 41. Optional Follow-Up Prompt for AI IDE
+
+After the scaffold is generated, use:
+
+```text
+Review the current codebase and identify any missing pieces required to satisfy the TradeComply AI South Africa MVP PRD.
+
+Check specifically for:
+- Multi-tenant authorization gaps
+- Missing database migrations
+- Missing background job handlers
+- Missing API validation
+- Missing audit logging
+- Missing tests
+- Missing seed data
+- Missing error states in UI
+
+Create a prioritized task list and then implement the highest priority fixes.
+```
+
+---
+
+# 42. Optional Cursor Rules File
+
+Create `.cursorrules` or equivalent:
+
+```text
+You are building TradeComply AI South Africa.
+
+Rules:
+- Use TypeScript for frontend.
+- Use Python 3.12 and FastAPI for backend.
+- Use SQLAlchemy 2.0 typed models.
+- Use Pydantic v2 schemas.
+- Every API route must validate input.
+- Every database query must filter by organization_id unless explicitly global.
+- Never expose secrets.
+- Never store plain-text passwords.
+- Use audit logs for mutation actions.
+- AI outputs must include confidence.
+- Compliance checks must be deterministic where possible.
+- Do not implement direct SARS submission.
+- Add tests for critical paths.
+- Keep code modular and typed.
+```
+
+---
+
+# 43. Final Recommendation
+
+Build this exact product first:
+
+> **TradeComply AI South Africa: AI pre-clearance packet generator for South African imports.**
+
+Start with:
+
+1. Durban port imports.
+2. OR Tambo air imports.
+3. Gauteng clearing agents.
+4. Solar/electronics/machinery importers.
+5. Freight forwarders dealing with ITAC/NRCS risk.
+
+Then expand into:
+
+1. Export/transit to Zimbabwe via Beitbridge.
+2. SADC corridors.
+3. AfCFTA compliance.
+4. Trade finance data layer.
+
+The most important thing is:
+
+> Do not build a generic AI dashboard.
+
+Build:
+
+> **A specialized workflow + compliance rule engine + structured trade data layer for South African cross-border trade.**
+
+That is the product that can generate revenue quickly and scale into a much larger infrastructure business.
+
+Good question — here's what closes the 0.5 gap. Four moves, roughly in priority order.
+
+## 1. Turn liability into a moat, not just a disclaimer
+
+Right now "Copilot, not autonomous engine" is a legal shield. Make it a sales weapon instead:
+- Get **professional indemnity insurance** before you sign customer #1 — this alone differentiates you from every scrappy AI wrapper competitor who can't back their output.
+- Partner with (or hire) a **licensed customs clearing agent as co-founder or paid advisor**. Their name/license on your advisory board turns "trust me" into "a registered SAQA-accredited declarant reviewed this system."
+- Build an **audit trail feature**: every AI suggestion timestamped, every human override logged. When (not if) a dispute happens, you have forensic proof the clerk made the final call. This is a product feature you can sell, not just a legal defense.
+
+## 2. Build the data flywheel explicitly — this is your real moat
+
+First-mover advantage in a 500-operator market erodes fast once competitors see you succeeding. What doesn't erode: **proprietary correction data**.
+- Every time a clerk overrides your suggested HS code, log it. After 6 months you have a dataset of real-world misclassification patterns no competitor can replicate without your customer base.
+- This is the pitch to investors later: "We're not selling software, we're building the largest verified HS-code correction dataset in Southern Africa."
+
+## 3. Pick ONE vertical and dominate before expanding
+
+The report says "focus on high-risk verticals first" but doesn't force the discipline. Make it explicit:
+- Choose **one** (Solar & Batteries is probably best — booming market, heavy NRCS rules, and it's a growing import category so there's urgency).
+- Get to 80% market share among Gauteng/KZN forwarders clearing solar/battery imports *before* touching textiles or steel.
+- Depth beats breadth here — a forwarder who sees you nail every edge case in their exact commodity type becomes a referral engine into their industry peers.
+
+## 4. De-risk the SARS scraper with a human-in-the-loop fallback
+
+"Automated scraper" as a single point of failure is dangerous. Add:
+- A **weekly manual verification pass** by a compliance person (even part-time/contracted) against your automated scrape, especially around budget speeches.
+- A **client-visible "last verified" timestamp** on tariff data — turns a potential liability into a transparency feature that builds trust.
+
+## 5. Prove the ROI number, don't just claim it
+
+Turn the "5x ROI" pitch from theory into evidence:
+- With your first 3 design partners, build a simple dashboard tracking **rand value of penalties/delays prevented** per client per month.
+- Use this as your only sales collateral. A screenshot showing "R47,000 saved this month" closes deals faster than any feature list.
+
+---
+
+**The honest ceiling:** even doing all of this, you're at 9.8-9.9, not a clean 10 — because the remaining risk (a SARS inspector, a bad month, an edge case nobody anticipated) isn't fully within your control in a regulatory-dependent business. That's fine. 9.8 with disciplined execution beats 10 in theory.
+
+System Rules & Principles
+Frontend: TypeScript, Next.js 14+ App Router, Tailwind CSS, shadcn/ui, TanStack Query, React Hook Form, Zod.
+
+Backend: Python 3.12, FastAPI, SQLAlchemy 2.0 (typed), Pydantic v2 schemas, Alembic, Celery, Redis.
+
+Database: PostgreSQL 16 + pgvector. Multi-tenant: EVERY DB query must filter by organization_id unless explicitly global.
+
+Compliance & Security: Multi-tenant isolation. No plain-text passwords (Argon2/bcrypt). Secrets in env. Immutable audit logs for all mutations. Strict POPIA compliance (no public LLM training on client data).
+
+AI Engine: Pre-clearance copilot (NOT autonomous / no direct SARS submission). Deterministic rules for regulatory checks; AI for OCR extraction & HS code classification suggestions (must include confidence scores). Human review mandatory for low confidence (<0.85) or high-risk items.
+
+Core Data Model (SQLAlchemy 2.0 / PostgreSQL)
+organizations: id (UUID), name, slug, plan
+
+users: id, email, password_hash, full_name, is_active
+
+memberships: id, organization_id, user_id, role (owner|admin|compliance_manager|clerk|viewer|api_service)
+
+api_keys: id, organization_id, name, key_hash, is_active
+
+parties: id, organization_id, party_type (importer|exporter|supplier|consignee|clearing_agent), name, vat_number, customs_code, address
+
+shipments: id, organization_id, reference, shipment_type (import|export|transit), transport_mode (sea|air|road|rail), status (draft|extracting|needs_review|approved|packet_generated), risk_level (low|medium|high|critical), incoterms, currency, foreign keys to parties
+
+documents: id, organization_id, shipment_id, document_type (commercial_invoice|packing_list|bill_of_lading|certificate_of_origin|import_permit|nrcs_loa|dangerous_goods_declaration|other), file_key, extraction_status
+
+extracted_fields: id, document_id, shipment_id, field_name, field_value (JSONB), confidence, verified
+
+line_items: id, shipment_id, document_id, description, sku, quantity, unit_price, total_price, currency, hs_code_suggested, final_hs_code, confidence, needs_review
+
+tariff_records: id, hs_code, sa_tariff_code, description, duty_rate, vat_rate (15%), embedding (VECTOR(1536))
+
+compliance_checks: id, organization_id, shipment_id, rule_pack (SARS_TARIFF|ITAC_PERMITS|NRCS_LOA|SADC_ORIGIN|DANGEROUS_GOODS|VALUATION_ANOMALIES), severity (info|warning|error|critical), message, recommended_action
+
+duty_estimates: id, shipment_id, customs_value, customs_duty, vat, total_estimated, disclaimer
+
+audit_logs: id, organization_id, user_id, action, entity_type, entity_id, before_value (JSONB), after_value (JSONB), metadata (JSONB)
+
+Core API Routes (/api/v1)
+POST /auth/register, POST /auth/login (Returns JWT)
+
+POST /organizations, GET /organizations/me
+
+POST /shipments, GET /shipments, GET /shipments/{id}
+
+POST /shipments/{id}/documents (Upload file), POST /documents/{id}/process
+
+GET /documents/{id}/extraction (Get header & line-item extractions + confidence)
+
+POST /shipments/{id}/classify (RAG vector search + LLM ranking for Top-5 HS codes)
+
+POST /shipments/{id}/compliance/check (Deterministic rule engine pass)
+
+POST /shipments/{id}/estimate (Duty/VAT computation)
+
+POST /shipments/{id}/packet (Outputs JSON, CSV, PDF summary)
+
+GET /tariffs/search?q={query}
+
+Background Jobs (Celery + Redis)
+document_extraction: Ingests file → OCR → LLM extraction → JSON Schema validation → Populates extracted_fields & line_items.
+
+shipment_classification: Generates embedding for line item → Vector search on tariff_records → LLM re-rank → Saves candidates with confidence.
+
+compliance_check: Evaluates deterministic rule packs (missing invoices, ITAC permit flags, NRCS LOA requirements, SADC origin mismatches, dangerous goods checks) → Assigns shipment risk score.
+
+packet_generation: Generates verified compliance packet (PDF/JSON/CSV) + records immutable audit log.
+
+Master Build Prompt
+Plaintext
+You are a principal full-stack SaaS engineer. Build the MVP for "TradeComply AI South Africa" as a monorepo (`apps/web` for Next.js, `apps/api` for FastAPI).
+
+CONSTRAINTS:
+- No direct SARS submission. Copilot pre-clearance validation model only.
+- Strict multi-tenancy: every DB query filters by organization_id.
+- Python 3.12 + FastAPI + SQLAlchemy 2.0 (typed) + Pydantic v2 + Postgres + pgvector + Redis + Celery + MinIO/S3.
+- Next.js 14 App Router + TypeScript + Tailwind CSS + shadcn/ui.
+- Mock external AI/OCR services if API keys are missing.
+- Include Docker Compose (`db`, `redis`, `minio`, `api`, `worker`, `web`), Alembic migrations, and seed scripts.
+
+CORE MODULES TO IMPLEMENT:
+1. Auth & Orgs: JWT authentication, Argon2 hashing, Multi-tenant organization isolation, RBAC (owner, admin, compliance_manager, clerk, viewer, api_service).
+2. Shipments & Documents: Upload invoices/packing lists, track import/export/transit metadata, handle party assignments.
+3. Extraction & Classification: Celery worker for OCR/LLM field extraction with confidence scores. Vector search (`pgvector`) over SA tariff database to generate Top-5 HS code recommendations with reasoning.
+4. Compliance Rule Engine: Deterministic rule checking for SARS, ITAC permits, NRCS LOA, SADC origin certificates, and Dangerous Goods. Highlight warnings and high-risk flags.
+5. Duty Estimator & Packet Generator: Calculate 15% VAT, customs duties, and generate downloadable JSON/CSV/PDF compliance packets with legal disclaimers.
+6. Audit Logging & Metering: Immutable mutation audit log (`audit_logs`) and usage tracking (`usage_events`).
+7. UI/UX: Dashboard, Shipment List, Extraction Review (with confidence badges & manual overrides), HS Code Classifier UI, Compliance Issue Resolver, and Audit Trail view.
+
+System Rules & Principles
+Frontend: TypeScript, Next.js 14+ App Router, Tailwind CSS, shadcn/ui, TanStack Query, React Hook Form, Zod.
+
+Backend: Python 3.12, FastAPI, SQLAlchemy 2.0 (typed), Pydantic v2 schemas, Alembic, Celery, Redis.
+
+Database: PostgreSQL 16 + pgvector. Multi-tenant: EVERY DB query must filter by organization_id unless explicitly global.
+
+Compliance & Security: Multi-tenant isolation. No plain-text passwords (Argon2/bcrypt). Secrets in env. Immutable audit logs for all mutations. Strict POPIA compliance (no public LLM training on client data).
+
+AI Engine: Pre-clearance copilot (NOT autonomous / no direct SARS submission). Deterministic rules for regulatory checks; AI for OCR extraction & HS code classification suggestions (must include confidence scores). Human review mandatory for low confidence (<0.85) or high-risk items.
+
+Core Data Model (SQLAlchemy 2.0 / PostgreSQL)
+organizations: id (UUID), name, slug, plan
+
+users: id, email, password_hash, full_name, is_active
+
+memberships: id, organization_id, user_id, role (owner|admin|compliance_manager|clerk|viewer|api_service)
+
+api_keys: id, organization_id, name, key_hash, is_active
+
+parties: id, organization_id, party_type (importer|exporter|supplier|consignee|clearing_agent), name, vat_number, customs_code, address
+
+shipments: id, organization_id, reference, shipment_type (import|export|transit), transport_mode (sea|air|road|rail), status (draft|extracting|needs_review|approved|packet_generated), risk_level (low|medium|high|critical), incoterms, currency, foreign keys to parties
+
+documents: id, organization_id, shipment_id, document_type (commercial_invoice|packing_list|bill_of_lading|certificate_of_origin|import_permit|nrcs_loa|dangerous_goods_declaration|other), file_key, extraction_status
+
+extracted_fields: id, document_id, shipment_id, field_name, field_value (JSONB), confidence, verified
+
+line_items: id, shipment_id, document_id, description, sku, quantity, unit_price, total_price, currency, hs_code_suggested, final_hs_code, confidence, needs_review
+
+tariff_records: id, hs_code, sa_tariff_code, description, duty_rate, vat_rate (15%), embedding (VECTOR(1536))
+
+compliance_checks: id, organization_id, shipment_id, rule_pack (SARS_TARIFF|ITAC_PERMITS|NRCS_LOA|SADC_ORIGIN|DANGEROUS_GOODS|VALUATION_ANOMALIES), severity (info|warning|error|critical), message, recommended_action
+
+duty_estimates: id, shipment_id, customs_value, customs_duty, vat, total_estimated, disclaimer
+
+audit_logs: id, organization_id, user_id, action, entity_type, entity_id, before_value (JSONB), after_value (JSONB), metadata (JSONB)
+
+Core API Routes (/api/v1)
+POST /auth/register, POST /auth/login (Returns JWT)
+
+POST /organizations, GET /organizations/me
+
+POST /shipments, GET /shipments, GET /shipments/{id}
+
+POST /shipments/{id}/documents (Upload file), POST /documents/{id}/process
+
+GET /documents/{id}/extraction (Get header & line-item extractions + confidence)
+
+POST /shipments/{id}/classify (RAG vector search + LLM ranking for Top-5 HS codes)
+
+POST /shipments/{id}/compliance/check (Deterministic rule engine pass)
+
+POST /shipments/{id}/estimate (Duty/VAT computation)
+
+POST /shipments/{id}/packet (Outputs JSON, CSV, PDF summary)
+
+GET /tariffs/search?q={query}
+
+Background Jobs (Celery + Redis)
+document_extraction: Ingests file → OCR → LLM extraction → JSON Schema validation → Populates extracted_fields & line_items.
+
+shipment_classification: Generates embedding for line item → Vector search on tariff_records → LLM re-rank → Saves candidates with confidence.
+
+compliance_check: Evaluates deterministic rule packs (missing invoices, ITAC permit flags, NRCS LOA requirements, SADC origin mismatches, dangerous goods checks) → Assigns shipment risk score.
+
+packet_generation: Generates verified compliance packet (PDF/JSON/CSV) + records immutable audit log.
+
+Master Build Prompt
+Plaintext
+You are a principal full-stack SaaS engineer. Build the MVP for "TradeComply AI South Africa" as a monorepo (`apps/web` for Next.js, `apps/api` for FastAPI).
+
+CONSTRAINTS:
+- No direct SARS submission. Copilot pre-clearance validation model only.
+- Strict multi-tenancy: every DB query filters by organization_id.
+- Python 3.12 + FastAPI + SQLAlchemy 2.0 (typed) + Pydantic v2 + Postgres + pgvector + Redis + Celery + MinIO/S3.
+- Next.js 14 App Router + TypeScript + Tailwind CSS + shadcn/ui.
+- Mock external AI/OCR services if API keys are missing.
+- Include Docker Compose (`db`, `redis`, `minio`, `api`, `worker`, `web`), Alembic migrations, and seed scripts.
+
+CORE MODULES TO IMPLEMENT:
+1. Auth & Orgs: JWT authentication, Argon2 hashing, Multi-tenant organization isolation, RBAC (owner, admin, compliance_manager, clerk, viewer, api_service).
+2. Shipments & Documents: Upload invoices/packing lists, track import/export/transit metadata, handle party assignments.
+3. Extraction & Classification: Celery worker for OCR/LLM field extraction with confidence scores. Vector search (`pgvector`) over SA tariff database to generate Top-5 HS code recommendations with reasoning.
+4. Compliance Rule Engine: Deterministic rule checking for SARS, ITAC permits, NRCS LOA, SADC origin certificates, and Dangerous Goods. Highlight warnings and high-risk flags.
+5. Duty Estimator & Packet Generator: Calculate 15% VAT, customs duties, and generate downloadable JSON/CSV/PDF compliance packets with legal disclaimers.
+6. Audit Logging & Metering: Immutable mutation audit log (`audit_logs`) and usage tracking (`usage_events`).
+7. UI/UX: Dashboard, Shipment List, Extraction Review (with confidence badges & manual overrides), HS Code Classifier UI, Compliance Issue Resolver, and Audit Trail view.
+
+Generate full repository structure, runnable backend and frontend code, tests, seed script for South African tariff items/rules, and Docker environment.

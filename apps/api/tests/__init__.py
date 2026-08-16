@@ -1,0 +1,3 @@
+"""
+TradeComply API test suite
+"""
